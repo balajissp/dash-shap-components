@@ -1,0 +1,167 @@
+{
+  "src/lib/components/ForcePlot.react.js": {
+    "description": "The ForcePlot component is used to visualize the shapley contributions\r\nto a single prediction made by a tree-based ML model. This is a simple\r\nwrapper on top of React implementation published in shapjs package.\r\nRead more about the component here: https://github.com/slundberg/shap",
+    "displayName": "ForcePlot",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID of this component, used to identify dash components\r\nin callbacks. The ID needs to be unique to the component."
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "html class associated with the component, used for styling purposes"
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called whenever any of the\r\nproperties change."
+      },
+      "features": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Values corrresponding to each feature, should have same set of keys as \"featureNames\" prop"
+      },
+      "baseValue": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "same as explainer.expected_value"
+      },
+      "plot_cmap": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "enum",
+              "value": [
+                {
+                  "value": "'RdBu'",
+                  "computed": false
+                },
+                {
+                  "value": "'GnPR'",
+                  "computed": false
+                },
+                {
+                  "value": "'CyPU'",
+                  "computed": false
+                },
+                {
+                  "value": "'PkYg'",
+                  "computed": false
+                },
+                {
+                  "value": "'DrDb'",
+                  "computed": false
+                },
+                {
+                  "value": "'LpLb'",
+                  "computed": false
+                },
+                {
+                  "value": "'YlDp'",
+                  "computed": false
+                },
+                {
+                  "value": "'OrId'",
+                  "computed": false
+                }
+              ]
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "string"
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": "The colors used for shap contributions that increase/decrease the prediction value.\r\nShould be one of:\r\n-- default colour combinations RdBu, GnPR, CyPU, PkYg, DrDb, LpLb, YlDp, OrId\r\n-- list of two hex codes, e.g., [\"#AAAA11\", \"#6633CC\"]\r\n-- list of two rgb values, e.g., [\"rgb(255, 13, 87)\", \"rgb(30, 136, 229)\"]",
+        "defaultValue": {
+          "value": "'RdBu'",
+          "computed": false
+        }
+      },
+      "link": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'identity'",
+              "computed": false
+            },
+            {
+              "value": "'logit'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": "either 'identity' or 'logit'",
+        "defaultValue": {
+          "value": "'identity'",
+          "computed": false
+        }
+      },
+      "featureNames": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Label corrresponding to each feature, should have same set of keys as \"features\" prop"
+      },
+      "outNames": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": false,
+        "description": "Single element list of prediction variable name."
+      },
+      "hideBaseValueLabel": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Show/hide the label above the base value",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "hideBars": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Show/hide the color bars",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "labelMargin": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Margin (in px) for labels on top of the plot"
+      }
+    }
+  }
+}
