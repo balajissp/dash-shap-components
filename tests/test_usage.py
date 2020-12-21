@@ -1,6 +1,7 @@
 from dash.testing.application_runners import import_app
 
 
+# TODO: write tests
 # Basic test for the component rendering.
 # The dash_duo pytest fixture is installed with dash (v1.0+)
 def test_render_component(dash_duo):

@@ -1,16 +1,16 @@
 import React, {Component, lazy, Suspense} from 'react';
 import PropTypes from 'prop-types';
-import {AdditiveForceVisualizer} from 'shapjs';
+import {AdditiveForceArrayVisualizer} from 'shapjs';
 import './css/force.css';
 
 // eslint-disable-next-line valid-jsdoc
 /**
- * The ForcePlot component is used to visualize the shapley contributions
- * to a single prediction made by a tree-based ML model. This is a simple
- * wrapper on top of React implementation published in shapjs package.
+ * The ForceArrayPlot component is used to visualize the shapley contributions
+ * to multiple predictions made by a tree-based ML model. This is a wrapper on
+ * top of React implementation published in shapjs package.
  * Read more about the component here: https://github.com/slundberg/shap
  */
-export default class ForcePlot extends Component {
+export default class ForceArrayPlot extends Component {
 
     render() {
         return (
@@ -25,14 +25,14 @@ export default class ForcePlot extends Component {
                     }}
                 >{this.props.title}</text>
                 <div className="dash-force-plot">
-                    <AdditiveForceVisualizer {...this.props} />
+                    <AdditiveForceArrayVisualizer {...this.props} />
                 </div>
             </div>
         );
     }
 }
 
-ForcePlot.propTypes = {
+ForceArrayPlot.propTypes = {
     /**
      * The ID of this component, used to identify dash components
      * in callbacks. The ID needs to be unique to the component.
@@ -61,11 +61,6 @@ ForcePlot.propTypes = {
     setProps: PropTypes.func,
 
     /**
-     * Values corresponding to each feature, should have same set of keys as "featureNames" prop
-     */
-    features: PropTypes.object.isRequired,
-
-    /**
      * same as explainer.expected_value
      */
     baseValue: PropTypes.number.isRequired,
@@ -80,41 +75,53 @@ ForcePlot.propTypes = {
     plot_cmap: PropTypes.oneOfType([
             PropTypes.oneOf(['RdBu', 'GnPR', 'CyPU', 'PkYg', 'DrDb', 'LpLb', 'YlDp', 'OrId']),
             PropTypes.arrayOf(PropTypes.string),
-        ]).isRequired,
+        ]),
     /**
      * either 'identity' or 'logit'
      */
-    link: PropTypes.oneOf(['identity', 'logit']).isRequired,
+    link: PropTypes.oneOf(['identity', 'logit']),
 
     /**
-     * Label corrresponding to each feature, should have same set of keys as "features" prop
+     * Labels corresponding to each feature, should have same set of keys as "features" prop
      */
     featureNames: PropTypes.objectOf(PropTypes.string).isRequired,
 
     /**
      * Single element list of prediction variable name.
      */
-    outNames: PropTypes.arrayOf(PropTypes.string),
-
-    /**
-     * Show/hide the label above the base value
-     */
-    hideBaseValueLabel: PropTypes.bool,
-
-    /**
-     * Show/hide the color bars
-     */
-    hideBars: PropTypes.bool,
+    outNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 
     /**
      * Margin (in px) for labels on top of the plot
      */
     labelMargin: PropTypes.number,
+
+    /**
+     * Custom ordering
+     */
+    ordering_keys: PropTypes.string,
+
+    /**
+     * Formatting for temporal axes, one of d3-time-formats
+     */
+    ordering_keys_time_format: PropTypes.string,
+
+    /*
+     * List of predictions, where each prediction is a dictionary
+     * describing the data-point index, predicted value and shapley
+     * contributions of each feature
+     */
+    explanations: PropTypes.arrayOf(
+        PropTypes.shape({
+            outValue: PropTypes.number,
+            simIndex: PropTypes.any,
+            features: PropTypes.object,
+        })
+    ).isRequired,
+
 };
 
-ForcePlot.defaultProps = {
+ForceArrayPlot.defaultProps = {
     plot_cmap: 'RdBu',
     link: 'identity',
-    hideBaseValueLabel: false,
-    hideBars: false,
 };

@@ -1,20 +1,18 @@
 # Dash SHAP Components
 
 Dash SHAP Components is a Dash component library, a slick wrapper on top of
- [shapjs](https://www.npmjs.com/package/shapjs) library. 
+ [shapjs](https://www.npmjs.com/package/shapjs) library, created using the [dash component boilerplate](https://github.com/plotly/dash-component-boilerplate)
 
-Get started with:
-1. Install Dash and its dependencies: https://dash.plotly.com/installation
-2. Run `python usage.py`
-3. Visit http://localhost:8050 in your web browser
+To use this component, install into your env using pip
+```
+$ pip install dash_shap_components
+```
 
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ### Install dependencies
-
-If you have selected install_dependencies during the prompt, you can skip this part.
 
 1. Install npm packages
     ```
@@ -35,8 +33,6 @@ If you have selected install_dependencies during the prompt, you can skip this p
     ```
     $ pip install -r tests/requirements.txt
     ```
-
-### Write your component code in `src/lib/components/DashShapComponents.react.js`.
 
 - The demo app is in `src/demo` and you will import your example component code into your demo app.
 - Test your code in a Python environment:

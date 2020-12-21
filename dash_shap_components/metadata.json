@@ -1,15 +1,29 @@
 {
-  "src/lib/components/ForcePlot.react.js": {
-    "description": "The ForcePlot component is used to visualize the shapley contributions\r\nto a single prediction made by a tree-based ML model. This is a simple\r\nwrapper on top of React implementation published in shapjs package.\r\nRead more about the component here: https://github.com/slundberg/shap",
-    "displayName": "ForcePlot",
+  "src/lib/components/ForceArrayPlot.react.js": {
+    "description": "The ForceArrayPlot component is used to visualize the shapley contributions\r\nto multiple predictions made by a tree-based ML model. This is a wrapper on\r\ntop of React implementation published in shapjs package.\r\nRead more about the component here: https://github.com/slundberg/shap",
+    "displayName": "ForceArrayPlot",
     "methods": [],
     "props": {
       "id": {
         "type": {
           "name": "string"
         },
-        "required": false,
+        "required": true,
         "description": "The ID of this component, used to identify dash components\r\nin callbacks. The ID needs to be unique to the component."
+      },
+      "style": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Inline css of each element"
+      },
+      "title": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Plot title"
       },
       "className": {
         "type": {
@@ -25,18 +39,11 @@
         "required": false,
         "description": "Dash-assigned callback that should be called whenever any of the\r\nproperties change."
       },
-      "features": {
-        "type": {
-          "name": "object"
-        },
-        "required": false,
-        "description": "Values corrresponding to each feature, should have same set of keys as \"featureNames\" prop"
-      },
       "baseValue": {
         "type": {
           "name": "number"
         },
-        "required": false,
+        "required": true,
         "description": "same as explainer.expected_value"
       },
       "plot_cmap": {
@@ -118,9 +125,210 @@
       },
       "featureNames": {
         "type": {
+          "name": "objectOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": true,
+        "description": "Labels corresponding to each feature, should have same set of keys as \"features\" prop"
+      },
+      "outNames": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": true,
+        "description": "Single element list of prediction variable name."
+      },
+      "labelMargin": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Margin (in px) for labels on top of the plot"
+      },
+      "ordering_keys": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Custom ordering"
+      },
+      "ordering_keys_time_format": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Formatting for temporal axes, one of d3-time-formats"
+      },
+      "explanations": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "shape",
+            "value": {
+              "outValue": {
+                "name": "number",
+                "required": false
+              },
+              "simIndex": {
+                "name": "any",
+                "required": false
+              },
+              "features": {
+                "name": "object",
+                "required": false
+              }
+            }
+          }
+        },
+        "required": true,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/ForcePlot.react.js": {
+    "description": "The ForcePlot component is used to visualize the shapley contributions\r\nto a single prediction made by a tree-based ML model. This is a simple\r\nwrapper on top of React implementation published in shapjs package.\r\nRead more about the component here: https://github.com/slundberg/shap",
+    "displayName": "ForcePlot",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": true,
+        "description": "The ID of this component, used to identify dash components\r\nin callbacks. The ID needs to be unique to the component."
+      },
+      "style": {
+        "type": {
           "name": "object"
         },
         "required": false,
+        "description": "Inline css of each element"
+      },
+      "title": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Plot title"
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "html class associated with the component, used for styling purposes"
+      },
+      "setProps": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Dash-assigned callback that should be called whenever any of the\r\nproperties change."
+      },
+      "features": {
+        "type": {
+          "name": "object"
+        },
+        "required": true,
+        "description": "Values corresponding to each feature, should have same set of keys as \"featureNames\" prop"
+      },
+      "baseValue": {
+        "type": {
+          "name": "number"
+        },
+        "required": true,
+        "description": "same as explainer.expected_value"
+      },
+      "plot_cmap": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "enum",
+              "value": [
+                {
+                  "value": "'RdBu'",
+                  "computed": false
+                },
+                {
+                  "value": "'GnPR'",
+                  "computed": false
+                },
+                {
+                  "value": "'CyPU'",
+                  "computed": false
+                },
+                {
+                  "value": "'PkYg'",
+                  "computed": false
+                },
+                {
+                  "value": "'DrDb'",
+                  "computed": false
+                },
+                {
+                  "value": "'LpLb'",
+                  "computed": false
+                },
+                {
+                  "value": "'YlDp'",
+                  "computed": false
+                },
+                {
+                  "value": "'OrId'",
+                  "computed": false
+                }
+              ]
+            },
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "string"
+              }
+            }
+          ]
+        },
+        "required": false,
+        "description": "The colors used for shap contributions that increase/decrease the prediction value.\r\nShould be one of:\r\n-- default colour combinations RdBu, GnPR, CyPU, PkYg, DrDb, LpLb, YlDp, OrId\r\n-- list of two hex codes, e.g., [\"#AAAA11\", \"#6633CC\"]\r\n-- list of two rgb values, e.g., [\"rgb(255, 13, 87)\", \"rgb(30, 136, 229)\"]",
+        "defaultValue": {
+          "value": "'RdBu'",
+          "computed": false
+        }
+      },
+      "link": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'identity'",
+              "computed": false
+            },
+            {
+              "value": "'logit'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": "either 'identity' or 'logit'",
+        "defaultValue": {
+          "value": "'identity'",
+          "computed": false
+        }
+      },
+      "featureNames": {
+        "type": {
+          "name": "objectOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": true,
         "description": "Label corrresponding to each feature, should have same set of keys as \"features\" prop"
       },
       "outNames": {

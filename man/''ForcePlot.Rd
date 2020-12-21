@@ -10,18 +10,23 @@ The ForcePlot component is used to visualize the shapley contributions to a sin
 }
 
 \usage{
-''ForcePlot(id=NULL, className=NULL, features=NULL, baseValue=NULL,
-plot_cmap=NULL, link=NULL, featureNames=NULL, outNames=NULL,
-hideBaseValueLabel=NULL, hideBars=NULL, labelMargin=NULL)
+''ForcePlot(id=NULL, style=NULL, title=NULL, className=NULL,
+features=NULL, baseValue=NULL, plot_cmap=NULL, link=NULL,
+featureNames=NULL, outNames=NULL, hideBaseValueLabel=NULL,
+hideBars=NULL, labelMargin=NULL)
 }
 
 \arguments{
 \item{id}{Character. The ID of this component, used to identify dash components
 in callbacks. The ID needs to be unique to the component.}
 
+\item{style}{Named list. Inline css of each element}
+
+\item{title}{Character. Plot title}
+
 \item{className}{Character. html class associated with the component, used for styling purposes}
 
-\item{features}{Named list. Values corrresponding to each feature, should have same set of keys as "featureNames" prop}
+\item{features}{Named list. Values corresponding to each feature, should have same set of keys as "featureNames" prop}
 
 \item{baseValue}{Numeric. same as explainer.expected_value}
 
@@ -33,7 +38,7 @@ Should be one of:
 
 \item{link}{A value equal to: 'identity', 'logit'. either 'identity' or 'logit'}
 
-\item{featureNames}{Named list. Label corrresponding to each feature, should have same set of keys as "features" prop}
+\item{featureNames}{List with named elements and values of type character. Label corrresponding to each feature, should have same set of keys as "features" prop}
 
 \item{outNames}{List of characters. Single element list of prediction variable name.}
 
