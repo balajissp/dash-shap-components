@@ -1,4 +1,4 @@
-import React, {Component, lazy, Suspense} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {AdditiveForceArrayVisualizer} from 'shapjs';
 import './css/force.css';
@@ -11,11 +11,31 @@ import './css/force.css';
  * Read more about the component here: https://github.com/slundberg/shap
  */
 export default class ForceArrayPlot extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {...this.props};
+        this.clickDataCapture = this.clickDataCapture.bind(this);
+    }
+
+    clickDataCapture() {
+        var clickIndex = this.el.nearestExpIndex;
+        var expl = this.state.explanations[clickIndex];
+        this.setState({'clickData': expl});
+        if (this.props.setProps) {
+            this.props.setProps({'clickData': expl});
+        }
+    }
+
+//    componentDidMount() {
+//        console.log(this.el.svg);
+//        removeEventListener('click', this.el.svg.on('click'));
+//        console.log(this.el.svg.on('click'));
+//    }
 
     render() {
         return (
-            <div id={this.props.id} className={this.props.className} style={this.props.style}>
-                <text
+            <div id={this.state.id} className={this.state.className} style={this.state.style}>
+                <span
                 style={{
                     fontWeight:"bold",
                     width:"100%",
@@ -23,9 +43,9 @@ export default class ForceArrayPlot extends Component {
                     display:"block",
                     fontSize:"15",
                     }}
-                >{this.props.title}</text>
-                <div className="dash-force-plot">
-                    <AdditiveForceArrayVisualizer {...this.props} />
+                >{this.state.title}</span>
+                <div className="dash-force-plot" onClickCapture={this.clickDataCapture}>
+                    <AdditiveForceArrayVisualizer ref={el => this.el = el} {...this.state} />
                 </div>
             </div>
         );
@@ -37,7 +57,7 @@ ForceArrayPlot.propTypes = {
      * The ID of this component, used to identify dash components
      * in callbacks. The ID needs to be unique to the component.
      */
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
 
     /**
      * Inline css of each element
@@ -63,7 +83,7 @@ ForceArrayPlot.propTypes = {
     /**
      * same as explainer.expected_value
      */
-    baseValue: PropTypes.number.isRequired,
+    baseValue: PropTypes.number,
 
     /**
      * The colors used for shap contributions that increase/decrease the prediction value.
@@ -84,12 +104,12 @@ ForceArrayPlot.propTypes = {
     /**
      * Labels corresponding to each feature, should have same set of keys as "features" prop
      */
-    featureNames: PropTypes.objectOf(PropTypes.string).isRequired,
+    featureNames: PropTypes.objectOf(PropTypes.string),
 
     /**
      * Single element list of prediction variable name.
      */
-    outNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+    outNames: PropTypes.arrayOf(PropTypes.string),
 
     /**
      * Margin (in px) for labels on top of the plot
@@ -97,28 +117,32 @@ ForceArrayPlot.propTypes = {
     labelMargin: PropTypes.number,
 
     /**
-     * Custom ordering
+     *  X-Axis label for each point
      */
-    ordering_keys: PropTypes.string,
+    ordering_keys: PropTypes.arrayOf(PropTypes.any),
 
     /**
      * Formatting for temporal axes, one of d3-time-formats
      */
     ordering_keys_time_format: PropTypes.string,
 
-    /*
+    /**
      * List of predictions, where each prediction is a dictionary
-     * describing the data-point index, predicted value and shapley
+     * describing the predicted value, similarity index and shapley
      * contributions of each feature
      */
     explanations: PropTypes.arrayOf(
         PropTypes.shape({
-            outValue: PropTypes.number,
-            simIndex: PropTypes.any,
-            features: PropTypes.object,
+            outValue: PropTypes.number.isRequired,
+            simIndex: PropTypes.any.isRequired,
+            features: PropTypes.object.isRequired,
         })
-    ).isRequired,
+    ),
 
+    /**
+     * attribute for attaching callbacks on click events
+     */
+    clickData: PropTypes.object
 };
 
 ForceArrayPlot.defaultProps = {

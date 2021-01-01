@@ -11,26 +11,26 @@ wrapper on top of React implementation published in shapjs package.
 Read more about the component here: https://github.com/slundberg/shap
 
 Keyword arguments:
-- id (string; required): The ID of this component, used to identify dash components
+- id (string; optional): The ID of this component, used to identify dash components
 in callbacks. The ID needs to be unique to the component.
 - style (dict; optional): Inline css of each element
 - title (string; optional): Plot title
 - className (string; optional): html class associated with the component, used for styling purposes
-- features (dict; required): Values corresponding to each feature, should have same set of keys as "featureNames" prop
-- baseValue (number; required): same as explainer.expected_value
+- features (dict; optional): Values corresponding to each feature, should have same set of keys as "featureNames" prop
+- baseValue (number; optional): same as explainer.expected_value
 - plot_cmap (a value equal to: 'RdBu', 'GnPR', 'CyPU', 'PkYg', 'DrDb', 'LpLb', 'YlDp', 'OrId' | list of strings; default 'RdBu'): The colors used for shap contributions that increase/decrease the prediction value.
 Should be one of:
 -- default colour combinations RdBu, GnPR, CyPU, PkYg, DrDb, LpLb, YlDp, OrId
 -- list of two hex codes, e.g., ["#AAAA11", "#6633CC"]
 -- list of two rgb values, e.g., ["rgb(255, 13, 87)", "rgb(30, 136, 229)"]
 - link (a value equal to: 'identity', 'logit'; default 'identity'): either 'identity' or 'logit'
-- featureNames (dict with strings as keys and values of type string; required): Label corrresponding to each feature, should have same set of keys as "features" prop
+- featureNames (dict with strings as keys and values of type string; optional): Label corrresponding to each feature, should have same set of keys as "features" prop
 - outNames (list of strings; optional): Single element list of prediction variable name.
 - hideBaseValueLabel (boolean; default False): Show/hide the label above the base value
 - hideBars (boolean; default False): Show/hide the color bars
 - labelMargin (number; optional): Margin (in px) for labels on top of the plot"""
     @_explicitize_args
-    def __init__(self, id=Component.REQUIRED, style=Component.UNDEFINED, title=Component.UNDEFINED, className=Component.UNDEFINED, features=Component.REQUIRED, baseValue=Component.REQUIRED, plot_cmap=Component.UNDEFINED, link=Component.UNDEFINED, featureNames=Component.REQUIRED, outNames=Component.UNDEFINED, hideBaseValueLabel=Component.UNDEFINED, hideBars=Component.UNDEFINED, labelMargin=Component.UNDEFINED, **kwargs):
+    def __init__(self, id=Component.UNDEFINED, style=Component.UNDEFINED, title=Component.UNDEFINED, className=Component.UNDEFINED, features=Component.UNDEFINED, baseValue=Component.UNDEFINED, plot_cmap=Component.UNDEFINED, link=Component.UNDEFINED, featureNames=Component.UNDEFINED, outNames=Component.UNDEFINED, hideBaseValueLabel=Component.UNDEFINED, hideBars=Component.UNDEFINED, labelMargin=Component.UNDEFINED, **kwargs):
         self._prop_names = ['id', 'style', 'title', 'className', 'features', 'baseValue', 'plot_cmap', 'link', 'featureNames', 'outNames', 'hideBaseValueLabel', 'hideBars', 'labelMargin']
         self._type = 'ForcePlot'
         self._namespace = 'dash_shap_components'
@@ -43,7 +43,7 @@ Should be one of:
         _locals.update(kwargs)  # For wildcard attrs
         args = {k: _locals[k] for k in _explicit_args if k != 'children'}
 
-        for k in ['id', 'features', 'baseValue', 'featureNames']:
+        for k in []:
             if k not in args:
                 raise TypeError(
                     'Required argument `' + k + '` was not specified.')

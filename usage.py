@@ -1,6 +1,7 @@
 import dash
 import dash_html_components as html
-
+from dash.dependencies import Output, Input, State
+import dash_core_components as dcc
 from dash_shap_components import ForcePlot, ForceArrayPlot
 
 # external_stylesheets = ["https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"]
@@ -98,7 +99,18 @@ app.layout = html.Div([
         get_plot('sample12', 'Titled Plot'),
         get_array_plot('sample22'),
     ], className='row', style={'display': 'inline-flex'}),
+    html.Div(id='callback-output'),
 ], className='container-fluid')
 
+
+@app.callback(
+    Output('callback-output', 'children'),
+    [Input('sample22', 'clickData')],
+    [State('sample22', 'explanations')]
+)
+def echo_click_data(clickData, explanations):
+    return dcc.Markdown(f'{clickData=},\n\n {explanations=}')
+
+
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)

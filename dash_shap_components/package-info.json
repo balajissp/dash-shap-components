@@ -1,5 +1,5 @@
 {
-  "name": "dash_shap_components",
+  "name": "dash-shap-components",
   "version": "0.0.1",
   "description": "Wrapper for using shap plots with dash",
   "main": "build/index.js",
@@ -8,7 +8,7 @@
     "validate-init": "python _validate_init.py",
     "prepublishOnly": "npm run validate-init",
     "build:js": "webpack --mode production",
-    "build:py_and_r": "dash-generate-components ./src/lib/components dash_shap_components -p package-info.json --r-prefix '' --jl-prefix ''",
+    "build:py_and_r": "dash-generate-components ./src/lib/components dash-shap-components -p package-info.json --r-prefix '' --jl-prefix ''",
     "build:py_and_r-activated": "(. venv/bin/activate || venv\\scripts\\activate && npm run build:py_and_r)",
     "build": "npm run build:js && npm run build:py_and_r",
     "build:activated": "npm run build:js && npm run build:py_and_r-activated"
@@ -16,7 +16,6 @@
   "author": "Balaji P <p.balaji.iitr@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "ramda": "^0.26.1",
     "shapjs": "^0.35.3"
   },
   "devDependencies": {
@@ -34,6 +33,7 @@
     "eslint-plugin-react": "^7.14.2",
     "npm": "^6.1.0",
     "prop-types": "^15.7.2",
+    "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-docgen": "^4.1.1",
     "react-dom": "^16.8.6",
@@ -46,5 +46,13 @@
   "engines": {
     "node": ">=8.11.0",
     "npm": ">=6.1.0"
+  },
+  "homepage": "https://github.com/balajissp/dash-shap-components" ,
+  "bugs": {
+    "url": "https://github.com/balajissp/dash-shap-components/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/balajissp/dash-shap-components.git"
   }
 }

@@ -14,7 +14,7 @@ The ForceArrayPlot component is used to visualize the shapley contributions to 
 baseValue=NULL, plot_cmap=NULL, link=NULL,
 featureNames=NULL, outNames=NULL, labelMargin=NULL,
 ordering_keys=NULL, ordering_keys_time_format=NULL,
-explanations=NULL)
+explanations=NULL, clickData=NULL)
 }
 
 \arguments{
@@ -43,15 +43,19 @@ Should be one of:
 
 \item{labelMargin}{Numeric. Margin (in px) for labels on top of the plot}
 
-\item{ordering_keys}{Character. Custom ordering}
+\item{ordering_keys}{List of logical | numeric | character | named list | unnamed lists. X-Axis label for each point}
 
 \item{ordering_keys_time_format}{Character. Formatting for temporal axes, one of d3-time-formats}
 
 \item{explanations}{List of lists containing elements 'outvalue', 'simindex', 'features'.
 those elements have the following types:
-  - outvalue (numeric; optional)
-  - simindex (logical | numeric | character | named list | unnamed list; optional)
-  - features (named list; optional)s. }
+  - outvalue (numeric; required)
+  - simindex (logical | numeric | character | named list | unnamed list; required)
+  - features (named list; required)s. List of predictions, where each prediction is a dictionary
+describing the predicted value, similarity index and shapley
+contributions of each feature}
+
+\item{clickData}{Named list. attribute for attaching callbacks on click events}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

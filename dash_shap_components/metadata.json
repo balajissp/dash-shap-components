@@ -2,13 +2,21 @@
   "src/lib/components/ForceArrayPlot.react.js": {
     "description": "The ForceArrayPlot component is used to visualize the shapley contributions\r\nto multiple predictions made by a tree-based ML model. This is a wrapper on\r\ntop of React implementation published in shapjs package.\r\nRead more about the component here: https://github.com/slundberg/shap",
     "displayName": "ForceArrayPlot",
-    "methods": [],
+    "methods": [
+      {
+        "name": "clickDataCapture",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      }
+    ],
     "props": {
       "id": {
         "type": {
           "name": "string"
         },
-        "required": true,
+        "required": false,
         "description": "The ID of this component, used to identify dash components\r\nin callbacks. The ID needs to be unique to the component."
       },
       "style": {
@@ -43,7 +51,7 @@
         "type": {
           "name": "number"
         },
-        "required": true,
+        "required": false,
         "description": "same as explainer.expected_value"
       },
       "plot_cmap": {
@@ -130,7 +138,7 @@
             "name": "string"
           }
         },
-        "required": true,
+        "required": false,
         "description": "Labels corresponding to each feature, should have same set of keys as \"features\" prop"
       },
       "outNames": {
@@ -140,7 +148,7 @@
             "name": "string"
           }
         },
-        "required": true,
+        "required": false,
         "description": "Single element list of prediction variable name."
       },
       "labelMargin": {
@@ -152,10 +160,13 @@
       },
       "ordering_keys": {
         "type": {
-          "name": "string"
+          "name": "arrayOf",
+          "value": {
+            "name": "any"
+          }
         },
         "required": false,
-        "description": "Custom ordering"
+        "description": "X-Axis label for each point"
       },
       "ordering_keys_time_format": {
         "type": {
@@ -172,21 +183,28 @@
             "value": {
               "outValue": {
                 "name": "number",
-                "required": false
+                "required": true
               },
               "simIndex": {
                 "name": "any",
-                "required": false
+                "required": true
               },
               "features": {
                 "name": "object",
-                "required": false
+                "required": true
               }
             }
           }
         },
-        "required": true,
-        "description": ""
+        "required": false,
+        "description": "List of predictions, where each prediction is a dictionary\r\ndescribing the predicted value, similarity index and shapley\r\ncontributions of each feature"
+      },
+      "clickData": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "attribute for attaching callbacks on click events"
       }
     }
   },
@@ -199,7 +217,7 @@
         "type": {
           "name": "string"
         },
-        "required": true,
+        "required": false,
         "description": "The ID of this component, used to identify dash components\r\nin callbacks. The ID needs to be unique to the component."
       },
       "style": {
@@ -234,14 +252,14 @@
         "type": {
           "name": "object"
         },
-        "required": true,
+        "required": false,
         "description": "Values corresponding to each feature, should have same set of keys as \"featureNames\" prop"
       },
       "baseValue": {
         "type": {
           "name": "number"
         },
-        "required": true,
+        "required": false,
         "description": "same as explainer.expected_value"
       },
       "plot_cmap": {
@@ -328,7 +346,7 @@
             "name": "string"
           }
         },
-        "required": true,
+        "required": false,
         "description": "Label corrresponding to each feature, should have same set of keys as \"features\" prop"
       },
       "outNames": {

@@ -37,7 +37,7 @@ ForcePlot.propTypes = {
      * The ID of this component, used to identify dash components
      * in callbacks. The ID needs to be unique to the component.
      */
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
 
     /**
      * Inline css of each element
@@ -63,12 +63,12 @@ ForcePlot.propTypes = {
     /**
      * Values corresponding to each feature, should have same set of keys as "featureNames" prop
      */
-    features: PropTypes.object.isRequired,
+    features: PropTypes.object,
 
     /**
      * same as explainer.expected_value
      */
-    baseValue: PropTypes.number.isRequired,
+    baseValue: PropTypes.number,
 
     /**
      * The colors used for shap contributions that increase/decrease the prediction value.
@@ -80,16 +80,16 @@ ForcePlot.propTypes = {
     plot_cmap: PropTypes.oneOfType([
             PropTypes.oneOf(['RdBu', 'GnPR', 'CyPU', 'PkYg', 'DrDb', 'LpLb', 'YlDp', 'OrId']),
             PropTypes.arrayOf(PropTypes.string),
-        ]).isRequired,
+        ]),
     /**
      * either 'identity' or 'logit'
      */
-    link: PropTypes.oneOf(['identity', 'logit']).isRequired,
+    link: PropTypes.oneOf(['identity', 'logit']),
 
     /**
      * Label corrresponding to each feature, should have same set of keys as "features" prop
      */
-    featureNames: PropTypes.objectOf(PropTypes.string).isRequired,
+    featureNames: PropTypes.objectOf(PropTypes.string),
 
     /**
      * Single element list of prediction variable name.
