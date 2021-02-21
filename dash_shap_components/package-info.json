@@ -1,6 +1,6 @@
 {
   "name": "dash-shap-components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Wrapper for using shap plots with dash",
   "main": "build/index.js",
   "scripts": {

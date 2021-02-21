@@ -15,7 +15,7 @@ export default class ForcePlot extends Component {
     render() {
         return (
             <div id={this.props.id} className={this.props.className} style={this.props.style}>
-                <text
+                <span
                 style={{
                     fontWeight:"bold",
                     width:"100%",
@@ -23,7 +23,7 @@ export default class ForcePlot extends Component {
                     display:"block",
                     fontSize:"15",
                     }}
-                >{this.props.title}</text>
+                >{this.props.title}</span>
                 <div className="dash-force-plot">
                     <AdditiveForceVisualizer {...this.props} />
                 </div>

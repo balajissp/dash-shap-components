@@ -145,6 +145,29 @@ ForceArrayPlot.propTypes = {
     clickData: PropTypes.object
 };
 
+/*
+    hacky approach to suppress alerts from shapjs package
+    TODO: change from anonymous function in original implementation!
+*/
+(function(proxied) {
+  window.alert = function() {
+    if (0 <= arguments[0].search("Ordering by category names is not yet supported.")){
+        console.warn(arguments[0]);
+    } else if (0 > arguments[0].search("This original index of the sample you clicked is ")) {
+        return proxied.apply(this, arguments);
+    }
+  };
+})(window.alert);
+
+(function(proxied) {
+  console.log = function() {
+    if (!((arguments.length == 3) && (arguments[0] == "found ")&& (arguments[2] == " used features"))
+     && 0 > arguments[0].search("joinPoint")){
+        return proxied.apply(this, arguments);
+    }
+  };
+})(console.log);
+
 ForceArrayPlot.defaultProps = {
     plot_cmap: 'RdBu',
     link: 'identity',
