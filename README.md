@@ -1,4 +1,5 @@
 # Dash SHAP Components
+![](https://img.shields.io/pypi/dm/dash-shap-components?color=green&label=PyPi%20Downloads)
 
 Dash SHAP Components is a Dash component library, a slick wrapper on top of
  [shapjs](https://www.npmjs.com/package/shapjs) library, created using the [dash component boilerplate](https://github.com/plotly/dash-component-boilerplate)
